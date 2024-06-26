@@ -89,7 +89,9 @@ export const Navbar = () => {
         </li>
         <li className="flex">
        
-            <ShoppingBagIcon className="h-4 w-4 text-black"/>
+            <ShoppingBagIcon 
+            className="h-4 w-4 text-black"
+            onClick={() => context.openCheckOutMenu()}/>
             {context.count}
           
         </li>

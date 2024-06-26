@@ -36,7 +36,7 @@ export const ShoppingCartProvider = ({ children }) => {
         isCheckOutMenuOpen,
         SetIsCheckOutMenuOpen,
         openCheckOutMenu,
-        closeCheckOutMenu
+        closeCheckOutMenu 
       }}
     >
       {children}
