@@ -9,6 +9,7 @@ import { NotFound } from "../NotFound";
 import { SignIn } from "../SignIn";
 import { Navbar } from "../../components/Navbar";
 import { ShoppingCartProvider } from "../../components/Context";
+import { CheckOutSideMenu } from "../../components/CheckOutSideMenu"
 
 //Styles
 import "./App.css";
@@ -31,6 +32,7 @@ const App = () => {
       <BrowserRouter>
         <AppRoutes />
         <Navbar />
+        <CheckOutSideMenu/>
       </BrowserRouter>
     </ShoppingCartProvider>
   );

@@ -2,22 +2,40 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../components/Context";
-// import { PlusIcon } from "@heroicons/react/24/solid";
-import { ShoppingBagIcon } from "@heroicons/react/24/solid";
+// import { FaPlus } from "react-icons/fa6";
+import { PlusIcon } from "@heroicons/react/24/solid";
+// import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 
-export const Card = ({ images, title, price, category: { name } }) => {
+export const Card = ({
+  images,
+  title,
+  price,
+  description,
+  category: { name },
+}) => {
   //Create a state for images with error
   // const context = useContext(ShoppingCartContext) se quito para desestructurar
   const { count, setCount } = useContext(ShoppingCartContext);
-  const { openProductDetail } = useContext(ShoppingCartContext);
+  const { openProductDetail, setSendProduct, setProductsToBuy, productsToBuy, openCheckOutMenu } = useContext(ShoppingCartContext);
   const [imageError, setImageError] = useState(false);
   const handleImageError = () => {
     setImageError(true);
-  const showProduct = () =>{
-    openProductDetail()
-    setSendProduct({images, title, price, category: {name}})
-  }
   };
+  const showProduct = () => {
+    openProductDetail();
+    setSendProduct({ images, title, price, description, category: { name } });
+  };
+
+  const addProductToCart = (event) => {
+    event.stopPropagation()
+    setCount(count + 1)
+    setProductsToBuy((prevProducts) => [
+      ...prevProducts,
+      {images, title, price}
+    ])
+    openCheckOutMenu()
+    console.log('product:', productsToBuy )
+  }
   return (
     <section
       className="bg-white cursor-pointer w-56 h-60 rounded-lg items-center"
@@ -38,19 +56,12 @@ export const Card = ({ images, title, price, category: { name } }) => {
           onError={handleImageError}
         />
         <div
-          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-4"
-          onClick={() => setCount(count + 1)
-            
-          }
-
+          className="absolute top-0 right-0 justify-center items-center bg-white w-6 h-6 rounded-full m-2"
+          onClick={(event)=> addProductToCart(event)}
         >
           {/* se cambia el estado, cambiandolo incremendandolo en uno */}
-          <ShoppingBagIcon
+          <PlusIcon 
             className="h-6 w-6 text-black"
-            onClick={(e) => {
-              e.stopPropagation();
-              // setCount(count + 1)
-            }}
           />
         </div>
       </figure>
@@ -67,6 +78,7 @@ Card.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
   category: PropTypes.shape({
     name: PropTypes.string.isRequired,
   }).isRequired,
