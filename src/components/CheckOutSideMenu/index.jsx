@@ -5,10 +5,23 @@ import { ShoppingCartContext } from "../Context";
 import { OrderCard } from "../../components/OrderCard";
 
 export const CheckOutSideMenu = () => {
-  const { isCheckOutMenuOpen, closeCheckOutMenu, productsToBuy } =
-    useContext(ShoppingCartContext);
-  console.log("product:", productsToBuy);
-  // console.log("product to show:", sendProduct);
+  const {
+    isCheckOutMenuOpen,
+    closeCheckOutMenu,
+    productsToBuy,
+    setProductsToBuy,
+    setCount,
+    count
+  } = useContext(ShoppingCartContext);
+
+  const handleDelete = (id) => {
+    const filteredProducts = productsToBuy.filter(
+      (product) => product.id != id
+    );
+    setProductsToBuy(filteredProducts);
+    setCount(count - 1);
+  };
+
   return (
     <aside
       className={`${
@@ -26,17 +39,16 @@ export const CheckOutSideMenu = () => {
         {/* toca mostrar la esteuctura del producto en el product detail */}
       </div>
       <div className="px-2 overflow-y-scroll">
-      {
-      productsToBuy.map((selectedProduct) => (
-        <OrderCard
-          key={selectedProduct.id}  
-          title={selectedProduct.title}
-          imageURL={selectedProduct.image}
-          price={selectedProduct.price}
-        />
-      ))
-      }
-
+        {productsToBuy.map((selectedProduct) => (
+          <OrderCard
+            key={selectedProduct.id}
+            id={selectedProduct.id}
+            title={selectedProduct.title}
+            imageURL={selectedProduct.image}
+            price={selectedProduct.price}
+            handleDelete={handleDelete}
+          />
+        ))}
       </div>
     </aside>
   );

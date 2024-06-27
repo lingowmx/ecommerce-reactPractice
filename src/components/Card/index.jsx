@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../components/Context";
 // import { FaPlus } from "react-icons/fa6";
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
 // import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 
 export const Card = ({
@@ -21,7 +21,7 @@ export const Card = ({
   //
   const {
     openProductDetail,
-    setSendProduct,   
+    setSendProduct,
     setProductsToBuy,
     productsToBuy,
     openCheckOutMenu,
@@ -36,19 +36,48 @@ export const Card = ({
   //Show product in product detail
   const showProduct = () => {
     openProductDetail();
-    setSendProduct({ id, image, title, price, description, category: { name } });
+    setSendProduct({
+      id,
+      image,
+      title,
+      price,
+      description,
+      category: { name },
+    });
   };
-
+  //Add product to cart
   const addProductToCart = (event) => {
     event.stopPropagation();
     setCount(count + 1);
     setProductsToBuy((prevProducts) => [
       ...prevProducts,
-      {id, image, title, price },
+      { id, image, title, price },
     ]);
     openCheckOutMenu();
     console.log("product:", productsToBuy);
   };
+  //Render Icon check-plus
+  const renderIcon = (id) => {
+    const isInCart =
+      productsToBuy.filter((product) => product.id === id).length > 0;
+    if (isInCart) {
+      return (
+        <div className="absolute top-0 right-0 justify-center items-center bg-black w-6 h-6 rounded-full m-2 cursor-auto">
+          <CheckIcon className="h-6 w-6 text-green-400 stroke-current" />
+        </div>
+      );
+    } else {
+      return (
+        <div
+          className="absolute top-0 right-0 justify-center items-center bg-white w-6 h-6 rounded-full m-2"
+          onClick={(event) => addProductToCart(event)}
+        >
+          <PlusIcon className="h-6 w-6 text-black" />
+        </div>
+      );
+    }
+  };
+
   // console.log("IMAGEURL:", images[0])
   return (
     <section
@@ -69,13 +98,7 @@ export const Card = ({
           alt={title}
           onError={handleImageError}
         />
-        <div
-          className="absolute top-0 right-0 justify-center items-center bg-white w-6 h-6 rounded-full m-2"
-          onClick={(event) => addProductToCart(event)}
-        >
-          {/* se cambia el estado, cambiandolo incremendandolo en uno */}
-          <PlusIcon className="h-6 w-6 text-black" />
-        </div>
+        {renderIcon(id)}
       </figure>
       <p className="flex place-content-between items-center">
         <span className="truncate px-1 text-sm font-light">{title}</span>
