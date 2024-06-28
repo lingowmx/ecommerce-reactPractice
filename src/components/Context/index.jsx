@@ -19,6 +19,8 @@ export const ShoppingCartProvider = ({ children }) => {
   const [isCheckOutMenuOpen, SetIsCheckOutMenuOpen] = useState(false);
   const openCheckOutMenu = () => SetIsCheckOutMenuOpen(true);
   const closeCheckOutMenu = () => SetIsCheckOutMenuOpen(false);
+//order
+  const [order, setOrder] = useState([])
 
   // console.log('count:', count)
   return (
@@ -36,7 +38,9 @@ export const ShoppingCartProvider = ({ children }) => {
         isCheckOutMenuOpen,
         SetIsCheckOutMenuOpen,
         openCheckOutMenu,
-        closeCheckOutMenu 
+        closeCheckOutMenu ,
+        order,
+        setOrder
       }}
     >
       {children}

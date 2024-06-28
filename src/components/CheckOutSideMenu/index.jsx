@@ -1,8 +1,10 @@
 import "./styles.css";
+import { Link } from "react-router-dom"
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../Context";
 import { OrderCard } from "../../components/OrderCard";
+import { totalPrice } from "../../utils/index.js";
 
 export const CheckOutSideMenu = () => {
   const {
@@ -11,7 +13,9 @@ export const CheckOutSideMenu = () => {
     productsToBuy,
     setProductsToBuy,
     setCount,
-    count
+    count,
+    order,
+    setOrder,
   } = useContext(ShoppingCartContext);
 
   const handleDelete = (id) => {
@@ -20,6 +24,18 @@ export const CheckOutSideMenu = () => {
     );
     setProductsToBuy(filteredProducts);
     setCount(count - 1);
+  };
+  const handleCheckOut = () => {
+    const orderToAdd = {
+      date: "01/02/23",
+      products: productsToBuy,
+      totalProduts: productsToBuy.length,
+      totalPrice: totalPrice(productsToBuy),
+    };
+    setOrder([...order, orderToAdd]);
+    setProductsToBuy([]); //convertir a un array vacio
+    closeCheckOutMenu()
+    setCount(count === 0)
   };
 
   return (
@@ -50,6 +66,14 @@ export const CheckOutSideMenu = () => {
           />
         ))}
       </div>
+      <div className="flex place-content-between px-8">
+        <p className="font-light">Total</p>
+        <span className="font-semibold text-xl">${totalPrice(productsToBuy)}</span>
+      </div>
+      <Link to='/my-orders/last' className=" w-full mx-auto px-3 mt-3 hover:cursor-pointer">
+      <button className="w-full bg-black text-white items-center px-2 rounded-lg"
+      onClick={() => handleCheckOut()}>Checkout</button>
+      </Link>
     </aside>
   );
 };
