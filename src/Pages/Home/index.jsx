@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../components/Context";
 import { Layout } from "../../components/Layout";
 import { Card } from "../../components/Card";
 import { ProductDetail } from "../../components/ProductDetail";
 
 export const Home = () => {
-  const [items, setItems] = useState(null);
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => setItems(data));
-  }, []);
+    const {items} = useContext(ShoppingCartContext)
+
   return (
     <Layout>
       HOME

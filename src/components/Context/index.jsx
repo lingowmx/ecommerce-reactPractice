@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 export const ShoppingCartContext = createContext(); //crear un contexto, 
@@ -21,7 +21,13 @@ export const ShoppingCartProvider = ({ children }) => {//crear proveedor que enc
   const closeCheckOutMenu = () => SetIsCheckOutMenuOpen(false);
 //order
   const [order, setOrder] = useState([])
-
+  // products
+  const [items, setItems] = useState(null);
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => setItems(data));
+  }, []);
   // console.log('count:', count)
   return (
     <ShoppingCartContext.Provider
@@ -40,7 +46,9 @@ export const ShoppingCartProvider = ({ children }) => {//crear proveedor que enc
         openCheckOutMenu,
         closeCheckOutMenu ,
         order,
-        setOrder
+        setOrder,
+        items,
+        setItems
       }}
     >
       {children}
