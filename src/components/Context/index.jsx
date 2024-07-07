@@ -2,9 +2,9 @@ import { createContext } from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-export const ShoppingCartContext = createContext(); //crear un contexto, crear proveedor que encapsula
+export const ShoppingCartContext = createContext(); //crear un contexto, 
+export const ShoppingCartProvider = ({ children }) => {//crear proveedor que encapsula
 
-export const ShoppingCartProvider = ({ children }) => {
 
   const [count, setCount] = useState(0);
   //Product Detail Open/Close

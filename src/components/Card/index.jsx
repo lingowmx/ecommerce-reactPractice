@@ -12,7 +12,7 @@ export const Card = ({
   title,
   price,
   description,
-  category: { name },
+  // category: { name },
 }) => {
   //Create a state for images with error
   // const context = useContext(ShoppingCartContext) se quito para desestructurar
@@ -54,7 +54,7 @@ export const Card = ({
       { id, image, title, price },
     ]);
     openCheckOutMenu();
-    console.log("product:", productsToBuy);
+    // console.log("product:", productsToBuy);
   };
   //Render Icon check-plus
   const renderIcon = (id) => {
@@ -108,14 +108,14 @@ export const Card = ({
   );
 };
 
-//PROPTYPES
-// Card.propTypes = {
-//   image: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   title: PropTypes.string.isRequired,
-//   price: PropTypes.number.isRequired,
-//   description: PropTypes.string.isRequired,
-//   id: PropTypes.number.isRequired,
-//   category: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
+// PROPTYPES
+Card.propTypes = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  // category: PropTypes.shape({
+  //   name: PropTypes.string.isRequired,
+  // }).isRequired,
+};

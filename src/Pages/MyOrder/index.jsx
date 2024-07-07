@@ -7,18 +7,21 @@ import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 export const MyOrder = () => {
   const { order } = useContext(ShoppingCartContext);
-  console.log(order?.slice(-1)[0]);
+  const currentPath = window.location.pathname
+  let index = currentPath.substring(currentPath.lastIndexOf('/') + 1)
+  if(index === 'last') index = order?.length -1
+  console.log(index)
   return (
     <Layout>
       <div className="relative flex w-80 items-center place-content-center mb-6">
-        <Link to={"./my-orders"} className="absolute left-0">
+        <Link to={"/my-orders"} className="absolute left-0">
           <ChevronLeftIcon className="  size-6 text-black cursor-pointer" />
         </Link>
         <h1>My Order</h1>
       </div>
 
       <div className="px-2 w-[450px]">
-        {order?.slice(-1)[0].products.map((selectedProduct) => (
+        {order?.[index]?.products.map((selectedProduct) => (
           <OrderCard
             key={selectedProduct.id}
             id={selectedProduct.id}

@@ -29,7 +29,7 @@ export const CheckOutSideMenu = () => {
     const orderToAdd = {
       date: "01/02/23",
       products: productsToBuy,
-      totalProduts: productsToBuy.length,
+      totalProducts: productsToBuy.length,
       totalPrice: totalPrice(productsToBuy),
     };
     setOrder([...order, orderToAdd]);
