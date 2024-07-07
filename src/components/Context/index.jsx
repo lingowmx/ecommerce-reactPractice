@@ -28,7 +28,9 @@ export const ShoppingCartProvider = ({ children }) => {//crear proveedor que enc
       .then((response) => response.json())
       .then((data) => setItems(data));
   }, []);
-  // console.log('count:', count)
+  // get products by title
+  const [searchByTitle, setSearchByTitle] = useState(null)
+  console.log('searchByTitle:', searchByTitle)
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -48,7 +50,9 @@ export const ShoppingCartProvider = ({ children }) => {//crear proveedor que enc
         order,
         setOrder,
         items,
-        setItems
+        setItems,
+        searchByTitle,
+      setSearchByTitle
       }}
     >
       {children}
