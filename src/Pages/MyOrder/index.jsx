@@ -26,7 +26,7 @@ export const MyOrder = () => {
             key={selectedProduct.id}
             id={selectedProduct.id}
             title={selectedProduct.title}
-            imageURL={selectedProduct.image}
+            imageURL={selectedProduct.images}
             price={selectedProduct.price}
           />
         ))}

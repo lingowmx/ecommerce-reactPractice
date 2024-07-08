@@ -29,11 +29,12 @@ export const ShoppingCartProvider = ({ children }) => {
   const [filteredItems, setFilteredItems] = useState(null);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://api.escuelajs.co/api/v1/products")
+    // fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
       .then((data) => setItems(data));
   }, []);
-  console.log("filteredItems:", filteredItems);
+  console.log(items);
 
   const filteredItemsByTitle = (items, searchByTitle) => {
     return items?.filter((item) =>

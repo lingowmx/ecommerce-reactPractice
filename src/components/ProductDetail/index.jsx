@@ -26,7 +26,7 @@ export const ProductDetail = () => {
       <figure className=" px-6">
         <img
           className="w-full h-full rounded-lg"
-          src={sendProduct.image}
+          src={sendProduct.images}
           alt={sendProduct.title}
         />
       </figure>

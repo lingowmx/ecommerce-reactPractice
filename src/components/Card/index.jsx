@@ -8,11 +8,11 @@ import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
 
 export const Card = ({
   id,
-  image,
+  images,
   title,
   price,
   description,
-  // category: { name },
+  category: { name },
 }) => {
   //Create a state for images with error
   // const context = useContext(ShoppingCartContext) se quito para desestructurar
@@ -38,7 +38,7 @@ export const Card = ({
     openProductDetail();
     setSendProduct({
       id,
-      image,
+      images,
       title,
       price,
       description,
@@ -51,7 +51,7 @@ export const Card = ({
     setCount(count + 1);
     setProductsToBuy((prevProducts) => [
       ...prevProducts,
-      { id, image, title, price },
+      { id, images, title, price },
     ]);
     openCheckOutMenu();
     // console.log("product:", productsToBuy);
@@ -89,10 +89,10 @@ export const Card = ({
           {name}
         </span>
         <img
-          className="w-full h-full object-contain rounded-lg"
+          className="w-full h-full object-cover rounded-lg"
           src={
             !imageError
-              ? image
+              ? images[0]
               : "https://images.pexels.com/photos/207142/pexels-photo-207142.jpeg?auto=compress&cs=tinysrgb&w=800"
           }
           alt={title}
@@ -110,12 +110,12 @@ export const Card = ({
 
 // PROPTYPES
 Card.propTypes = {
-  image: PropTypes.string.isRequired,
+  images: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  // category: PropTypes.shape({
-  //   name: PropTypes.string.isRequired,
-  // }).isRequired,
+  category: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
