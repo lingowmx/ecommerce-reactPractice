@@ -110,7 +110,7 @@ export const Card = ({
 
 // PROPTYPES
 Card.propTypes = {
-  images: PropTypes.string.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,

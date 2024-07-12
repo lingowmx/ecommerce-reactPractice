@@ -5,10 +5,10 @@ import { Card } from "../../components/Card";
 import { ProductDetail } from "../../components/ProductDetail";
 
 export const Home = () => {
-  const { items, setSearchByTitle, filteredItems, searchByTitle } =
+  const { items, setSearchByTitle, filteredItems } =
     useContext(ShoppingCartContext);
   const renderView = () => {
-    const itemsToRender = searchByTitle?.length > 0 ? filteredItems : items;
+    const itemsToRender = filteredItems?.length > 0 ? filteredItems : items;
     if (itemsToRender?.length > 0) {
       return itemsToRender.map((item) => (
          <Card key={item.id} {...item} />
@@ -17,11 +17,12 @@ export const Home = () => {
       return <p>No Results, sorry</p>;
     }
   };
+  // esta funcion me gusto mucho
 
   return (
     <Layout>
       <div>
-        <h1>HOME</h1>
+        <h1>Home Home Home</h1>
       </div>
       <input
         type="text"

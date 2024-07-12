@@ -4,7 +4,8 @@ import { ShoppingCartContext } from "../Context";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 
 export const Navbar = () => {
-  const context = useContext(ShoppingCartContext);
+  // const context = useContext(ShoppingCartContext);
+  const {openCheckOutMenu, setSearchByCategory, count} = useContext(ShoppingCartContext)
   const activeStyle = "underline underline-offset-4";
   return (
     <nav className="w-full flex justify-between items-center fixed z-10 py-5 px-8 text-sm font-light top-0">
@@ -15,6 +16,7 @@ export const Navbar = () => {
         <li>
           <NavLink
             to="/"
+            onClick={() => setSearchByCategory('')}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             All
@@ -23,6 +25,7 @@ export const Navbar = () => {
         <li>
           <NavLink
             to="/clothes"
+            onClick={() => setSearchByCategory('clothes')}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Clothes
@@ -31,6 +34,7 @@ export const Navbar = () => {
         <li>
           <NavLink
             to="/electronics"
+            onClick={() => setSearchByCategory('electronics')}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Electronics
@@ -39,6 +43,7 @@ export const Navbar = () => {
         <li>
           <NavLink
             to="/furniture"
+            onClick={() => setSearchByCategory('furniture')}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Furniture
@@ -47,6 +52,7 @@ export const Navbar = () => {
         <li>
           <NavLink
             to="/toys"
+            onClick={() => setSearchByCategory('toys')}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Toys
@@ -55,6 +61,7 @@ export const Navbar = () => {
         <li>
           <NavLink
             to="/others"
+            onClick={() => setSearchByCategory('others')}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Others
@@ -91,8 +98,8 @@ export const Navbar = () => {
        
             <ShoppingBagIcon 
             className="h-4 w-4 text-black"
-            onClick={() => context.openCheckOutMenu()}/>
-            {context.count}
+            onClick={() => openCheckOutMenu()}/>
+            {count}
           
         </li>
       </ul>

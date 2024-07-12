@@ -16,6 +16,7 @@ export const CheckOutSideMenu = () => {
     count,
     order,
     setOrder,
+    setSearchByTitle
   } = useContext(ShoppingCartContext);
 
   const handleDelete = (id) => {
@@ -36,6 +37,7 @@ export const CheckOutSideMenu = () => {
     setProductsToBuy([]); //convertir a un array vacio
     closeCheckOutMenu()
     setCount(count === 0)
+    setSearchByTitle(null)
   };
 
   return (
